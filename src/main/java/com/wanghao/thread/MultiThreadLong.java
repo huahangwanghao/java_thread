@@ -18,7 +18,8 @@ public class MultiThreadLong {
 		public void run() {
 			while(true){
 				MultiThreadLong.t=to;
-				Thread.yield();
+				Thread.yield(); //这句话的意思就是说,暂时让我的线程让出来cpu的使用权利,比如还有T1,T2 和我相互争抢资源, 我也和他们抢,就是不知道谁能抢到
+			
 			}
 		}
 	}
