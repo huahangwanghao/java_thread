@@ -34,20 +34,36 @@ public class StopThreadUnsafe {
 	
 	//创建一个线程,用于修改user对象里面的内容
 	public static class ChangeObjectThread extends Thread{
+		
+		volatile boolean isStop=false;
+		
+		public void stopMe(){
+			this.isStop=true;
+		}
+		
 		@Override
 		public void run() {
-					while(true){
-						synchronized (u) {//对于共享的对象加锁.我只有拿到i这个对象锁,我才能进入下面的代码.
-					int v=(int) (System.currentTimeMillis()/1000);
-					u.setId(v);
-					try {
-						Thread.sleep(1000); //程序在sleep的时候,不会释放锁
-					} catch (Exception e) {
+			
+			
+				while(true){
+					if(isStop){ //增加一个标志位,停止这个线程的时候 先执行一下t.stopMe(); 然后再执行t.stop() 这样就是手工的停止线程啦
+						System.out.println("this thread is stop");
+						break;
 					}
-					u.setName(String.valueOf(v));
+					synchronized (u) {//对于共享的对象加锁.我只有拿到i这个对象锁,我才能进入下面的代码.
+				int v=(int) (System.currentTimeMillis()/1000);
+				u.setId(v);
+				try {
+					Thread.sleep(1000); //程序在sleep的时候,不会释放锁
+				} catch (Exception e) {
 				}
-				//Thread.yield();//让线程让出资源.
+				u.setName(String.valueOf(v));
 			}
+			//Thread.yield();//让线程让出资源.
+		}
+			
+			
+					
 		}
 	}
 	
@@ -69,11 +85,6 @@ public class StopThreadUnsafe {
 		}
 		
 	}
-	
-	
-	
-	
-	
 	public static void main(String[] args) throws InterruptedException {
 		new ReadObjectThread().start();
 		new ChangeObjectThread().start();
