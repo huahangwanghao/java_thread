@@ -2,7 +2,8 @@ package com.wanghao.thread;
 
 public class NewThread implements Runnable {
 
-	@Override
+	
+	
 	public void run() {
 		System.out.println("新线程:"+Thread.currentThread().getName());
 

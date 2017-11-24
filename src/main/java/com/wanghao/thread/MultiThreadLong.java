@@ -14,7 +14,6 @@ public class MultiThreadLong {
 			this.to=to;
 		}
 		
-		@Override
 		public void run() {
 			while(true){
 				MultiThreadLong.t=to;
@@ -25,7 +24,6 @@ public class MultiThreadLong {
 	}
 	
 	public static class ReadT implements Runnable{
-		@Override
 		public void run() {
 			while(true){
 				long tmp=MultiThreadLong.t;
