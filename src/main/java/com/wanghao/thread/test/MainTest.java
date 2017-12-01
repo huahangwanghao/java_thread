@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class MainTest {
 
@@ -54,6 +55,10 @@ public class MainTest {
 			System.out.println(out);
 			System.out.println(System.currentTimeMillis()-start);
 			System.out.println(Runtime.getRuntime().availableProcessors());
+			
+			for (int i=0;i<10;i++){
+				System.out.println(new Random(123).nextInt());
+			}
 	}
 
 	

@@ -10,7 +10,7 @@ import java.util.Collections;
  */
 public class ArrayListDemo {
 
-	static ArrayList<Integer> al=new   ArrayList<>(10);
+	static ArrayList<Integer> al=new   ArrayList<Integer>(10);
 	
 	//static ArrayList<Integer> al=(ArrayList<Integer>) Collections.synchronizedList(new   ArrayList<Integer>(10));
 	public static class AddThread implements Runnable{
