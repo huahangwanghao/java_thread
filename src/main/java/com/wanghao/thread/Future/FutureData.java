@@ -8,37 +8,11 @@ package com.wanghao.thread.Future;
  */
 
 public class FutureData implements Data {
-
-	
-	
-	
-	static class HasService  implements Runnable{
-		
-		private UserService userService;
-		
-		public HasService (UserService userService){
-			this.userService=userService;
-		}
-
-		public void run() {
-			System.out.println(userService);
-		}
-		
-	}
-	public static void main(String[] args) {
-		UserService userService=new UserServiceImpl();
-		HasService hasService=new HasService(userService);
-		Thread newThread =new Thread(hasService);
-		newThread.start();
-	}
-	
-	
-	
-	
-	
 	private RealData realData=null;
 	private boolean isReady=false;
 	
+	//set方法写的挺牛逼, 先判断 是否准备好啦,如果准备好啦, 直接return. 
+	//如果没有准备好, 对字段就是赋值, 然后放开判断标准, 然后通知队列里面的人
 	public synchronized void setRealData(RealData realData){
 		if(isReady){
 			return;
@@ -49,13 +23,15 @@ public class FutureData implements Data {
 	}
 	
 	
-	
+	//这个分俩种,如果在上面的set之前调用的,肯定进入里面的死循环,然后进行wait操作,然后是上面的set操作啦. notify啦. 然后可以正常工作啦.
+	//如果是上面set之后调用的, 那么死循环已经进不去啦. 原因是 isReady 已经变了.
 	public synchronized String getData() {
 		while(!isReady){
 			try {
+				System.out.println("怕等待的时候, set操作还没有处理完");
 				wait();
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 		}
 		return realData.result;

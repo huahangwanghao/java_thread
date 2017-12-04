@@ -6,20 +6,19 @@ package com.wanghao.thread.Future;
  */
 public class RealData implements Data {
 	protected  String result="";
-	public String getData(String para) {
+	public  RealData(String para) {
 		// TODO Auto-generated method stub
 		StringBuffer sb =new StringBuffer();
 		for (int i=0;i<10;i++) {
 			sb.append(para);
 			try {
-				Thread.sleep(100);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		result=sb.toString();
-		return result;
 	}
 
 	public String getData() {
