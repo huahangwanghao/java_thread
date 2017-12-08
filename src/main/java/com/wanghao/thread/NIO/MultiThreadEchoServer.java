@@ -52,7 +52,6 @@ public class MultiThreadEchoServer {
 						if(os!=null)os.close();
 						clientSocket.close();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				
