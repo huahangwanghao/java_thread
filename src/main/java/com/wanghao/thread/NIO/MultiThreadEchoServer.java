@@ -35,7 +35,7 @@ public class MultiThreadEchoServer {
 				os=new PrintWriter(clientSocket.getOutputStream(),true);
 				String inputLine=null;
 				long b=System.currentTimeMillis();
-				System.out.println("死循环之前的log"+is.readLine());
+				System.out.println("死循环之前的log123"+is.readLine());
 				while((inputLine=is.readLine())!=null){
 					os.print(inputLine);
 				}
